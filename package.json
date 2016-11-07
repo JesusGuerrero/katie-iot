@@ -1,14 +1,15 @@
 {
-  "name": "button-led",
+  "name": "storymode",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "buttonA.js",
+  "dependencies": {
+    "onoff": "^1.1.1"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "onoff": "^1.1.1"
-  }
+  "author": "Katie",
+  "license": "ISC"
 }
