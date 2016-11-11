@@ -7,13 +7,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <link rel="stylesheet" href="reset.css">
-        <link rel="stylesheet" href="button.css">
+        <link rel="stylesheet" href="buttonstyle.css">
         <link rel="stylesheet" href="style.css">
 
+        <!--
         <link rel="stylesheet" href="unsemantic-grid-responsive-tablet-no-ie7.css">
-        
+        -->
         <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
         <script type="text/javascript" src="select.js"></script>
+        <script>
+            $(function(){
+                var sleepStatus = 0;
+                var strengthStatus = 0;
+                var attackStatus = 0;
+                var sneakStatus = 0;
+                
+                if($(".three .A").hasClass("selected")){
+                    sleepStatus = 10;
+                } else if($(".three .B").hasClass("selected")){
+                    sleepStatus = 6;
+                } else {
+                    sleepStatus = 0;
+                }
+                console.log(sleepStatus);
+                //end of sleep
+                
+                
+                
+            });//end of all
+        </script>
     </head>
 
     <body>
@@ -21,11 +43,11 @@
             <div class="chapter one narrator">
                 <h1>You start on your journey</h1>
             </div><!--end of chapter-->
-            
+
             <div class="chapter two narrator">
                 <h1>You've walked far now and it starts raining</h1>
             </div><!--end of chapter-->
-            
+
             <div class="chapter three">
                 <div class="question">
                     <h1>Where will you take shelter?</h1>
@@ -49,15 +71,15 @@
                     </div>
                 </div>
             </div><!--end of chapter-->
-            
+
             <div class="chapter four narrator">
                 <h1>You're out on the road and after getting <span class="sleep"></span> hours of sleep.</h1>
             </div><!--end of chapter-->
-            
+
             <div class="chapter five narrator">
                 <h1>You hear rustling in the forest next to you. A wolf jumps out at you!</h1>
             </div><!--end of chapter-->
-            
+
             <div class="chapter six">
                 <div class="question">
                     <h1>What will you do?!</h1>
@@ -83,7 +105,7 @@
                     </div>
                 </div>
             </div><!--end of chapter-->
-            
+
             <div class="chapter seven">
                 <div class="question">
                     <h1>After your encounter with the wolf you find a fork in the road which will you take?</h1>
@@ -104,7 +126,7 @@
                     </div>
                 </div>
             </div><!--end of chapter-->
-            
+
         </div>
         <div class="button-container">
             <div class="red button">
