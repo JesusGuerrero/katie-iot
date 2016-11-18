@@ -6,6 +6,9 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
+        <link href="https://fonts.googleapis.com/css?family=Almendra+Display|Cardo" rel="stylesheet">
+        
+        
         <link rel="stylesheet" href="reset.css">
         <link rel="stylesheet" href="buttonstyle.css">
         <link rel="stylesheet" href="style.css">
@@ -14,24 +17,254 @@
         <link rel="stylesheet" href="unsemantic-grid-responsive-tablet-no-ie7.css">
         -->
         <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="select.js"></script>
+        <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+        <script type="text/javascript" src="buttonscript.js"></script>
+        
+        
         <script>
             $(function(){
+                var chapter = 1;
+                var sleep = 0;
                 var sleepStatus = 0;
                 var strengthStatus = 0;
                 var attackStatus = 0;
                 var sneakStatus = 0;
+                var optionchosen = 1;
+                var fightflight = 1;
+                var fight = 1;
                 
-                if($(".three .A").hasClass("selected")){
-                    sleepStatus = 10;
-                } else if($(".three .B").hasClass("selected")){
-                    sleepStatus = 6;
-                } else {
-                    sleepStatus = 0;
+                var windowheight = ($(window).height()-234)/2;
+                var bodyheight = $(".body").height()/2;
+                var bodytop = windowheight - bodyheight;
+
+                $(".body").css({marginTop: bodytop});
+
+                
+                $(".button").click(function(){
+                    var windowheight = ($(window).height()-234)/2;
+                    var bodyheight = $(".body").height()/2;
+                    var bodytop = windowheight - bodyheight;
+                    
+                    $(".body").css({marginTop: bodytop});
+                    
+                    
+                    chapter++;
+                    
+                    if(chapter < 8){
+
+                        if(chapter == 2 && optionchosen == 1){
+                            $(".chapter.two").addClass("chaptershow").siblings().removeClass("chaptershow")
+                        }
+                        else if(chapter == 3 && optionchosen == 1){
+                            $(".chapter.three").addClass("chaptershow").siblings().removeClass("chaptershow");
+
+                            optionchosen--;
+                            chapter--;
+                            $(".red.button").click(function(){
+                                $(".three .A").addClass("selected");
+                                $(".three .question").hide();
+                                $(".three .option-container").hide();
+                                $(".three .consequence.A").show();
+                                optionchosen++;
+                                
+                                if($(".three .A").hasClass("selected")){
+                                    sleepStatus = 10;
+                                    sleep = 9;
+                                    $(".sleep").text(sleep);
+                                } else if($(".three .B").hasClass("selected")){
+                                    sleepStatus = 6;
+                                    sleep = 5;
+                                    $(".sleep").text(sleep);
+                                } else {
+                                    sleepStatus = 0;
+                                    sleep = 0;
+                                    $(".sleep").text(sleep);
+                                }
+                            })
+                            
+                            $(".blue.button").click(function(){
+                                $(".three .B").addClass("selected");
+                                $(".three .question").hide();
+                                $(".three .option-container").hide();
+                                $(".three .consequence.B").show();
+                                optionchosen++;
+                                
+                                if($(".three .A").hasClass("selected")){
+                                    sleepStatus = 10;
+                                    sleep = 9;
+                                    $(".sleep").text(sleep);
+                                } else if($(".three .B").hasClass("selected")){
+                                    sleepStatus = 6;
+                                    sleep = 5;
+                                    $(".sleep").text(sleep);
+                                } else {
+                                    sleepStatus = 0;
+                                    sleep = 0;
+                                    $(".sleep").text(sleep);
+                                }
+                            })
+                            
+                            $(".green.button").click(function(){
+                                $(".three .C").addClass("selected");
+                                $(".three .question").hide();
+                                $(".three .option-container").hide();
+                                $(".three .consequence.C").show();
+                                optionchosen++;
+                                
+                                if($(".three .A").hasClass("selected")){
+                                    sleepStatus = sleepStatus + 10;
+                                    sleep = 9;
+                                    $(".sleep").text(sleep);
+                                } else if($(".three .B").hasClass("selected")){
+                                    sleepStatus = sleepStatus + 6;
+                                    sleep = 5;
+                                    $(".sleep").text(sleep);
+                                } else {
+                                    sleepStatus = sleepStatus + 0;
+                                    sleep = 0;
+                                    $(".sleep").text(sleep);
+                                }
+                            })
+                            
+                        }
+                        else if(chapter == 4 && optionchosen == 1){
+                           optionchosen--; $(".chapter.four").addClass("chaptershow").siblings().removeClass("chaptershow")
+                        }
+                        else if(chapter == 5 && optionchosen == 1){
+                           optionchosen--; $(".chapter.five").addClass("chaptershow").siblings().removeClass("chaptershow")
+                        }
+                        else if(chapter == 6 && optionchosen == 1){
+                             $(".chapter.six").addClass("chaptershow").siblings().removeClass("chaptershow")
+                            
+                            optionchosen--;
+                            chapter--;
+                            
+                            
+                            $(".red.six").click(function(){
+                                chap6fightflight();
+                                $(".six .question").hide();
+                                $(".six .option-container").hide();
+                                $(".red").removeClass("six").addClass("seven").siblings().removeClass("six").addClass("seven");
+                                optionchosen = 0;
+
+                                chap6fight();
+                                chapter++;
+                                optionchosen = 1
+                                console.log("option: " + optionchosen)
+                            });
+                            
+                            $(".blue.six").click(function(){
+                                chap6fightflight();
+                                $(".six .question").hide();
+                                $(".six .option-container").hide();
+                                $(".six .consequence-container").show(); $(".blue").removeClass("six").addClass("seven").siblings().removeClass("six").addClass("seven");
+                                
+                                optionchosen = 0;
+
+                                chap6flight();
+                                chapter++;
+                                optionchosen = 1
+                            });
+                            console.log("option number " + optionchosen)    
+                        }
+                        else if(chapter == 7 && optionchosen == 1){
+                            $(".chapter.seven").addClass("chaptershow").siblings().removeClass("chaptershow")
+                            
+                            optionchosen--;
+                            chapter--;
+                            
+                            $(".red.seven").click(function(){
+                                $(".seven .question").hide();
+                                $(".seven .option-container").hide();
+                                $(".seven .consequence-container").show();
+                                $(".seven .consequence.A").show().siblings().hide();
+                                chapter++;
+                            });
+                            
+                            $(".blue.seven").click(function(){
+                                $(".seven .question").hide();
+                                $(".seven .option-container").hide();
+                                $(".seven .consequence-container").show();
+                                $(".seven .consequence.B").show().siblings().hide();
+                                console.log("hello")
+                                chapter++;
+                            });
+                        }
+                        else{
+                            $("end").show
+                        }
+                    }
+                    
+                    else if(chapter > 7){
+                        console.log("greater than 7");
+                        setTimeout(reset,5000)
+                    }
+                    
+                    else{
+                        console.log("error")
+                    }
+                    
+                    
+                });
+                
+                function chap6fightflight() {
+                    if(sleepStatus >= 8){
+                        attackStatus = 10;
+                        sneakStatus =  7.5;
+                        console.log("high sleep");
+                    } else if(sleepStatus <= 7 && sleepStatus > 3){
+                        attackStatus = attackStatus + 7;
+                        sneakStatus = sneakStatus + 5;
+                        console.log("med sleep");
+                    } else if(sleepStatus <= 3){
+                        attackStatus = attackStatus + 3;
+                        sneakStatus = sneakStatus + 2.5;
+                        console.log("low sleep");
+                    } else {
+                        console.log(Error);
+                    }
+                    console.log("sleep: " + sleepStatus);
+                    console.log("attack: " + attackStatus);
+                    console.log("sneak: " + sneakStatus);
+                }//end of flight or fight
+                
+                function chap6fight(){
+                    var animalStatus = Math.floor((Math.random() * 10) + 1 );
+                    console.log("The animal was a " + animalStatus + " you were at " + attackStatus);
+                    var animaloutcome = animalStatus - attackStatus;
+                    if (animaloutcome < 1){
+                        console.log(" you win!")
+                        $(".six .consequence.A.win").show();
+                    } else {
+                        console.log(animaloutcome)
+                        $(".six .consequence.A.lose").show();
+                        setTimeout(reset,5000)
+                    }
+                }//end of fight
+                
+                function chap6flight(){
+                    var animalStatus = Math.floor((Math.random() * 10) + 1);
+                    console.log("The animal is " + animalStatus + " youre at " + sneakStatus);
+                    var animalnofight = animalStatus - sneakStatus;
+                    if(animalnofight < 1){
+                        console.log("you got away!")
+                        $(".consequence.B.win").show();
+                    } else {
+                        console.log(animalnofight);
+                        console.log("death!")
+                        $(".consequence.B.lose").show();
+                        setTimeout(reset,5000)
+                    }
                 }
-                console.log(sleepStatus);
-                //end of sleep
                 
+                var reset = function(){
+                    location.reload();
+                }
+                
+                //chap3sleep();
+                //chap6fightflight();
+                //chap6fight();
+                //chap6flight();
                 
                 
             });//end of all
@@ -40,7 +273,7 @@
 
     <body>
         <div class="body">
-            <div class="chapter one narrator">
+            <div class="chapter one narrator chaptershow">
                 <h1>You start on your journey</h1>
             </div><!--end of chapter-->
 
@@ -73,7 +306,7 @@
             </div><!--end of chapter-->
 
             <div class="chapter four narrator">
-                <h1>You're out on the road and after getting <span class="sleep"></span> hours of sleep.</h1>
+                <h1>You're out on the road after getting <span class="sleep"></span> hours of sleep.</h1>
             </div><!--end of chapter-->
 
             <div class="chapter five narrator">
@@ -87,7 +320,7 @@
                 <div class="option-container">
                     <ul class="option-list">
                         <li class="option A">Attack the beast!</li>
-                        <li class="otpion B">Back away carefully</li>
+                        <li class="option B">Back away carefully</li>
                     </ul>
                 </div>
                 <div class="consequence-container">
@@ -100,7 +333,7 @@
                     <div class="consequence B win">
                         <h1>You were able to back away with out angering it. Whew! That was close! You continue your journey.</h1>
                     </div>
-                    <div class="consequnce B lose">
+                    <div class="consequence B lose">
                         <h1>You were able to back away but tripped over ourself and the wolf attacked. You did not survive.</h1>
                     </div>
                 </div>
@@ -115,27 +348,27 @@
                         <li class="option A">Take the road travelled. Oh look there's even an old crone selling fuits down the road!</li>
                         <li class="option B">Take the road less travelled. There are brambles and and fallen tress over the road.</li>
                     </ul>
-                    <div class="consequence-container">
-                        <div class="consequence A">
-                            <h1>It was a trap Boo,</h1>
-                            <h1>You Dead.</h1>
-                        </div>
-                        <div class="consequence B">
-                            <h1>You met a nice old couple that let you stay in their house. Sweet!</h1>
-                        </div>
+                </div>
+                <div class="consequence-container">
+                    <div class="consequence A">
+                        <h1>It was a trap Boo,</h1>
+                        <h1>You Dead.</h1>
+                    </div>
+                    <div class="consequence B">
+                        <h1>You met a nice old couple that let you stay in their house. Sweet!</h1>
                     </div>
                 </div>
             </div><!--end of chapter-->
 
         </div>
         <div class="button-container">
-            <div class="red button">
+            <div class="red button six">
                 <p>1</p>
             </div>
-            <div class="blue button">
+            <div class="blue button six">
                 <p>2</p>
             </div>
-            <div class="green button">
+            <div class="green button six">
                 <p>3</p>
             </div>
         </div>

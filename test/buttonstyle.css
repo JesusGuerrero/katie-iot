@@ -7,22 +7,27 @@ html {
 }
 
 .button-container{
-    
+    position: fixed;
+    left: 4%;
+    bottom: 10px;
+    width: 92%;
 }
 
-.button {
-    width: 100px;
-    height: 100px;
+.button{
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    font-size: 14px;
 }
 
 .red {
-    background-color: red;
+    background-color: #ff3b3b;
 }
 
 .blue {
-    background-color: blue;
+    background-color: #4d4dff;
 }
 
 .green {
-    background-color: green;
+    background-color: #3ea33e;
 }

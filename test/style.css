@@ -6,7 +6,32 @@ html {
 	box-sizing: border-box;
 }
 
-h1{
+body{
+    padding: 20px;
+    background-color: #29252C;
+    font-family: 'Cardo', serif;
+    color: #D8E9F0;
     font-size: 20px;
 }
 
+h1{
+    text-align: center;
+    font-family: 'Almendra Display', cursive;
+    font-size: 60px;
+    padding-bottom: 20px
+}
+
+.chapter, .consequence{
+    display: none;
+}
+
+.chaptershow{
+    display: block;
+}
+
+.option{
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #32425B;
+    border-left: 7px solid #32425B;
+}
