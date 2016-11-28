@@ -16,6 +16,7 @@
         <!--
         <link rel="stylesheet" href="unsemantic-grid-responsive-tablet-no-ie7.css">
         -->
+	<script type="text/javascript" src="buttons.js"></script>
         <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
         <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
         <script type="text/javascript" src="buttonscript.js"></script>
@@ -40,7 +41,10 @@
                 $(".body").css({marginTop: bodytop});
 
                 
-                $(".button").click(function(){
+		
+		
+
+		if(state == 1){
                     var windowheight = ($(window).height()-234)/2;
                     var bodyheight = $(".body").height()/2;
                     var bodytop = windowheight - bodyheight;
@@ -60,7 +64,8 @@
 
                             optionchosen--;
                             chapter--;
-                            $(".red.button").click(function(){
+                            buttonA.watch(function(err,state){
+				if(state == 1){
                                 $(".three .A").addClass("selected");
                                 $(".three .question").hide();
                                 $(".three .option-container").hide();
@@ -80,9 +85,11 @@
                                     sleep = 0;
                                     $(".sleep").text(sleep);
                                 }
+				} else{console.log("ehh")}
                             })
                             
-                            $(".blue.button").click(function(){
+                            buttonB.watch(function(err,state){
+				if(state == 1){
                                 $(".three .B").addClass("selected");
                                 $(".three .question").hide();
                                 $(".three .option-container").hide();
@@ -102,9 +109,11 @@
                                     sleep = 0;
                                     $(".sleep").text(sleep);
                                 }
+				} else{console.log("ehhhh")}
                             })
                             
-                            $(".green.button").click(function(){
+                            buttonC.watch(function(){
+				if(state == 1){
                                 $(".three .C").addClass("selected");
                                 $(".three .question").hide();
                                 $(".three .option-container").hide();
@@ -124,6 +133,7 @@
                                     sleep = 0;
                                     $(".sleep").text(sleep);
                                 }
+				} else{console.log("ehhhhhhhhhhh")}
                             })
                             
                         }
@@ -140,7 +150,8 @@
                             chapter--;
                             
                             
-                            $(".red.six").click(function(){
+                            buttonA.watch(function(){
+				if(state == 1){
                                 chap6fightflight();
                                 $(".six .question").hide();
                                 $(".six .option-container").hide();
@@ -151,9 +162,11 @@
                                 chapter++;
                                 optionchosen = 1
                                 console.log("option: " + optionchosen)
+				}else{console.log("hey")}
                             });
                             
-                            $(".blue.six").click(function(){
+                            buttonB.watch(function(){
+				if(state == 1){
                                 chap6fightflight();
                                 $(".six .question").hide();
                                 $(".six .option-container").hide();
@@ -164,7 +177,12 @@
                                 chap6flight();
                                 chapter++;
                                 optionchosen = 1
+				} else{console.log("heyyy")}
                             });
+
+			    buttonC.watch(function(){
+			    });
+
                             console.log("option number " + optionchosen)    
                         }
                         else if(chapter == 7 && optionchosen == 1){
@@ -173,21 +191,25 @@
                             optionchosen--;
                             chapter--;
                             
-                            $(".red.seven").click(function(){
+                            buttonA.watch(function(){
+				if(state == 1){
                                 $(".seven .question").hide();
                                 $(".seven .option-container").hide();
                                 $(".seven .consequence-container").show();
                                 $(".seven .consequence.A").show().siblings().hide();
                                 chapter++;
+				} else{console.log("egg")}
                             });
                             
-                            $(".blue.seven").click(function(){
+                            buttonB.watch(function(){
+				if(state == 1){
                                 $(".seven .question").hide();
                                 $(".seven .option-container").hide();
                                 $(".seven .consequence-container").show();
                                 $(".seven .consequence.B").show().siblings().hide();
                                 console.log("hello")
                                 chapter++;
+				} else{console.log("eggs")}
                             });
                         }
                         else{
@@ -205,8 +227,7 @@
                         console.log("error")
                     }
                     
-                    
-                });
+                };
                 
                 function chap6fightflight() {
                     if(sleepStatus >= 8){
