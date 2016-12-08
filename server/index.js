@@ -1,18 +1,18 @@
-'use strict';
+var socket = io();
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+socket.on('event:hello', function(){
+  console.log('Hello from server through socket');
+});
 
-if ( process.env.NODE_ENV === 'development' ) {
-    require('node-env-file')('.env');
-    console.log('Running Development!');
-}
+socket.on('event:buttonA', function(){
+  console.log('button A pressed');
+});
 
-var config = require('./config/env')( process.env )
-    , server = require('./config/hapi')( config )
-    , io = require('./config/sockets')( server );
+socket.on('event:buttonB', function(){
+  console.log('button B pressed');
+});
 
-require('./config/motion')( io );
+socket.on('event:buttonC', function(){
+  console.log('button C pressed');
+});
 
-require('./routes/index')( server );
-
-module.exports = server;
