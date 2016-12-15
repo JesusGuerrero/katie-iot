@@ -12,13 +12,7 @@ buttonA.watch(function(err,state){
 	if(state == 1){
 		console.log("buttonA on");
 		
-		io.on('connection', function(socket){
-			console.log('socket listening ...' + socket.id);
-			socket.emit('event:buttonA');
-			socket.on('disconnect', function(){
-			console.log('goodbye socket...' + socket.id);
-			});
-		});
+		if(io){io.sockets.emit('event:buttonA');}
 	} else {
 		console.log("buttonA off");
 	}
@@ -28,14 +22,8 @@ buttonA.watch(function(err,state){
 buttonB.watch(function(err,state){
 	if(state == 1){
 		console.log("buttonB on");
-			
-		io.on('connection', function(socket){
-			console.log('socket listening ...' + socket.id);
-			socket.emit('event:buttonB');
-			socket.on('disconnect', function(){
-			console.log('goodbye socket...' + socket.id);
-			});
-		});
+		
+		if(io){io.sockets.emit('event:buttonB');}
 	} else {
 		console.log("buttonB off");
 	}
@@ -45,13 +33,8 @@ buttonC.watch(function(err,state){
 	if(state == 1){
 		console.log("buttonC on");
 
-		io.on('connection', function(socket){
-			console.log('socket listening ...' + socket.id);
-			socket.emit('event:buttonC');
-			socket.on('disconnect', function(){
-			console.log('goodbye socket...' + socket.id);
-			});
-		});
+		
+		if(io){io.sockets.emit('event:buttonC');}
 	} else {
 		console.log("buttonC off");
 	}
